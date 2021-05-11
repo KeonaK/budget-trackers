@@ -18,7 +18,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 mongoose.set("useCreateIndex", true);
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/indexedDB", {
   useNewUrlParser: true,
   useFindAndModify: false,
   useCreateIndex: true,
