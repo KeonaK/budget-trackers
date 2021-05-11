@@ -2,8 +2,10 @@ const express = require("express");
 const logger = require("morgan");
 const mongoose = require("mongoose");
 const compression = require("compression");
-
-const PORT = 3000;
+const dotenv = require("dotenv");
+// config will read your .env file, parse the contents, assign it to process.env
+dotenv.config();
+const PORT = process.env.PORT || 3000;
 
 const app = express();
 
@@ -15,9 +17,13 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect("mongodb://localhost/budget", {
+mongoose.set("useCreateIndex", true);
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/budget", {
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useCreateIndex: true,
+  useUnifiedTopology: true
+
 });
 
 // routes
